@@ -1,0 +1,22 @@
+#!/bin/bash
+# setup-cron.sh - Setup scheduled backups on EC2
+
+cat > /tmp/github-backup-cron << 'EOF'
+# GitHub repository backup - runs daily at 2 AM
+0 2 * * * /usr/local/bin/pwsh /opt/github-backup/backup_script_ec2.ps1 >> /var/log/github-backup.log 2>&1
+
+# Weekly cleanup of old log files
+0 3 * * 0 find /var/log -name "github-backup*.log" -mtime +7 -delete
+EOF
+
+# Install cron job
+sudo cp /tmp/github-backup-cron /etc/cron.d/github-backup
+sudo chmod 644 /etc/cron.d/github-backup
+sudo chown root:root /etc/cron.d/github-backup
+
+# Create log directory
+sudo mkdir -p /var/log
+sudo chown ec2-user:ec2-user /var/log/github-backup.log
+
+echo "✅ Cron job installed - backups will run daily at 2 AM"
+echo "📝 Logs: /var/log/github-backup.log"
