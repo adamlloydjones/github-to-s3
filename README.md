@@ -1,4 +1,4 @@
-# 🛠️ Gotrek's GitHub Backup System
+# 🛠️ GitHub Backup System
 
 *"By Grimnir's beard, the finest repository backup solution ever forged!"*
 
