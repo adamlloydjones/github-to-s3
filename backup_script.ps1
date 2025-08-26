@@ -9,8 +9,8 @@ Write-Host "Timestamp: $(Get-Date)"
 
 try {
     # Get configuration
-    $secretName = $env:SECRET_NAME ?? "github-backup-config"
-    $region = $env:AWS_DEFAULT_REGION ?? "ap-southeast-2"
+    $secretName = $env:SECRET_NAME ?? "MY-GITHUB-APP-SECRETS"
+    $region = $env:AWS_DEFAULT_REGION ?? "MY-AWS-REGION"
 
     Write-Host "Fetching configuration from AWS Secrets Manager: $secretName" -ForegroundColor Cyan
     
